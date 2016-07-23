@@ -1,10 +1,15 @@
 ## Handlebars 模板引擎
 ### 1. 标识
 #### 在模板中使用{{}}或{{{}}}
-#### {{}} 会转译标签
-#### {{{}}} 则直接替换
-#### {{}}的含义是：比如如果上下文对象是{name:'kongzhi'}，模板是<div>hello,{name}</div>,则{{name}}会被替换成 kongzhi;
-#### {{{}}}的含义是：如果上下文对象是html文本，比如 {name:'<b>kongzhi</b>'},模板是<div>{name}</div>,如果还是使用{{}}的话，结果就是 
+#### {{}} 会转译标签;{{{}}} 则直接替换
+#### {{}}的含义是：比如如果上下文对象是{name:'kongzhi'}，模板是
+<pre><div>hello,{name}</div>,</pre>
+则{{name}}会被替换成 kongzhi;
+#### {{{}}}的含义是：如果上下文对象是html文本，比如 
+<pre>{name:'<b>kongzhi</b>'},</pre>
+模板是
+<pre><div>{name}</div>,</pre>
+如果还是使用{{}}的话，结果就是 
     <p>hello,&lt;div&gt;kongzhi&lt;div&gt;</p>
 但是这个时候我们可以使用三个大括号就可以了 {{{}}}；
 ### 2.注释
@@ -77,8 +82,7 @@ Handlebars的注释在浏览器中是看不到的；
     app.listen(app.get('port'),function(){
       console.log('Express started on http://localhost:'+app.get('port'));
     }); 
-#### 当用户访问 http://localhost:4000/ 时候 会把home视图页面的内容渲染出来，且把layout下的main.handlebars模板文件加载进去; 同理：用户访问 http://localhost:4000/about 的时候
-会把about视图页面的内容渲染出来;
+#### 当用户访问 http://localhost:4000/ 时候 会把home视图页面的内容渲染出来，且把layout下的main.handlebars模板文件加载进去; 同理：用户访问 http://localhost:4000/about 的时候,会把about视图页面的内容渲染出来;
 <pre>
 app.engine('handlebars',handlebars({
   //layoutsDir: 'views',      // 设置布局模板文件的目录为views文件夹
@@ -102,18 +106,17 @@ app.get('/',function(req,res){
 ### 5.局部文件
 #### 有时候，有些组成html的模板部分的数据需要被重复使用，我们可以使用模板中的
 局部文件，它并不会渲染整个视图和整个网页，可以理解为把某一块文件插入到指定的模块内，比如我下面有一个局部文件，在views目录下新建一个目录partials目录，views/partials/pub.handlebars; 代码如下：
-<pre>
-<div class="pub-cls">
-  {{#each obj.data.locations}}
-    <div class="obj-elem">
-      <h3>{{name}}</h3>
-      <a href="{{href}}">
-        <img src="{{iconUrl}}" alt="{{alt}}"/>
-      </a>
+    <div class="pub-cls">
+      {{#each obj.data.locations}}
+        <div class="obj-elem">
+          <h3>{{name}}</h3>
+          <a href="{{href}}">
+            <img src="{{iconUrl}}" alt="{{alt}}"/>
+          </a>
+        </div>
+        {{/each}}
     </div>
-    {{/each}}
-</div>
-</pre>
+
 #### 使用res.locals 可以对任何视图可以使用，但是我们并不会想个别的视图干扰指定的上下文，所以我们可以把所有的局部文件上下文都放在obj这个对象中；我们在App.js入口文件加入如下函数代码：
 <pre>
 function getData(){
@@ -154,10 +157,8 @@ app.use(function(req,res,next){
 })
 </pre>
 #### 现在我们可以把我们的局部文件放在我们home页面去，进入views/home.handlebars文件；添加如下代码：
-<pre>
-  <h1>welcome to home</h1>
-  {{>pub}}
-</pre>
+    <h1>welcome to home</h1>
+    {{>pub}}
 #### 语法 {{> partial_name}}可以让我们视图包含一个局部文件；express3-handlebars 会在views/partials中寻找一个叫做 partial_name.handle-bars的视图；
 
 
