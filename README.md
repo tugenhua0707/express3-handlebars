@@ -105,7 +105,6 @@ app.get('/',function(req,res){
 #### 我们可以指定在layouts目录下新建一个main2.handlebars模板；
 ### 5.局部文件
 #### 有时候，有些组成html的模板部分的数据需要被重复使用，我们可以使用模板中的局部文件，它并不会渲染整个视图和整个网页，可以理解为把某一块文件插入到指定的模块内，比如我下面有一个局部文件，在views目录下新建一个目录partials目录，views/partials/pub.handlebars; 代码如下：
-<pre>
     <div class="pub-cls">
       {{#each obj.data.locations}}
         <div class="obj-elem">
@@ -116,7 +115,6 @@ app.get('/',function(req,res){
         </div>
         {{/each}}
     </div>
-</pre>
 #### 使用res.locals 可以对任何视图可以使用，但是我们并不会想个别的视图干扰指定的上下文，所以我们可以把所有的局部文件上下文都放在obj这个对象中；我们在App.js入口文件加入如下函数代码：
 <pre>
 function getData(){
