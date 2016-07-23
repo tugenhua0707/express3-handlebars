@@ -3,14 +3,14 @@
 #### 在模板中使用{{}}或{{{}}}
 #### {{}} 会转译标签;{{{}}} 则直接替换
 #### {{}}的含义是：比如如果上下文对象是{name:'kongzhi'}，模板是
-<pre><div>hello,{name}</div>,</pre>
+    <div>hello,{name}</div>
 则{{name}}会被替换成 kongzhi;
 #### {{{}}}的含义是：如果上下文对象是html文本，比如 
-<pre>{name:'<b>kongzhi</b>'},</pre>
+    {name:'<b>kongzhi</b>'}
 模板是
-<pre><div>{name}</div>,</pre>
+    <div>{name}</div>
 如果还是使用{{}}的话，结果就是 
-    <p>hello,&lt;div&gt;kongzhi&lt;div&gt;</p>
+<pre><p>hello,&lt;div&gt;kongzhi&lt;div&gt;</p></pre>
 但是这个时候我们可以使用三个大括号就可以了 {{{}}}；
 ### 2.注释
 #### Handlebars的注释：{{! xxxx}}
@@ -104,8 +104,8 @@ app.get('/',function(req,res){
 </pre>
 #### 我们可以指定在layouts目录下新建一个main2.handlebars模板；
 ### 5.局部文件
-#### 有时候，有些组成html的模板部分的数据需要被重复使用，我们可以使用模板中的
-局部文件，它并不会渲染整个视图和整个网页，可以理解为把某一块文件插入到指定的模块内，比如我下面有一个局部文件，在views目录下新建一个目录partials目录，views/partials/pub.handlebars; 代码如下：
+#### 有时候，有些组成html的模板部分的数据需要被重复使用，我们可以使用模板中的局部文件，它并不会渲染整个视图和整个网页，可以理解为把某一块文件插入到指定的模块内，比如我下面有一个局部文件，在views目录下新建一个目录partials目录，views/partials/pub.handlebars; 代码如下：
+<pre>
     <div class="pub-cls">
       {{#each obj.data.locations}}
         <div class="obj-elem">
@@ -116,7 +116,7 @@ app.get('/',function(req,res){
         </div>
         {{/each}}
     </div>
-
+</pre>
 #### 使用res.locals 可以对任何视图可以使用，但是我们并不会想个别的视图干扰指定的上下文，所以我们可以把所有的局部文件上下文都放在obj这个对象中；我们在App.js入口文件加入如下函数代码：
 <pre>
 function getData(){
@@ -144,8 +144,7 @@ function getData(){
   }
 }
 </pre>
-#### 现在我们可以在app.js中简单的创建一个中间件给res.locals.obj对象添加一些
-数据；代码如下：
+#### 现在我们可以在app.js中简单的创建一个中间件给res.locals.obj对象添加一些数据；代码如下：
 <pre>
 // 简单的创建一个中间件obj对象添加这些数据
 app.use(function(req,res,next){
