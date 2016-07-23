@@ -25,13 +25,13 @@ Handlebars的注释在浏览器中是看不到的；
 #### 比如现在项目的目录结构如下：
 <pre>
 |——demo                    # 项目名称 
-├── app.js                 # 项目的入口文件 app.js
-|—— package.json           # 依赖包
-└── views                  # 视图文件目录
-    ├── home.handlebars
-    |—— about.handlebars
-    |—— 404.handlebars
-    └── layouts
+|  ├── app.js                 # 项目的入口文件 app.js
+|  |—— package.json           # 依赖包
+|  └── views                  # 视图文件目录
+|    ├── home.handlebars
+|    |—— about.handlebars
+|    |—— 404.handlebars
+|    └── layouts
         └── main.handlebars  # 基本的布局框架
 </pre>
 #### main.handlebars 代码如下：
